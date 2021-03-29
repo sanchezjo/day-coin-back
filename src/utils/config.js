@@ -5,6 +5,15 @@ export default class Config {
     dotenv.config();
   }
 
+  getEnv() {
+    const ENV = process.env.ENV;
+    if (!ENV) {
+      return 'DEV';
+    }
+
+    return ENV;
+  }
+
   getServerPort() {
     const PORT = Number(process.env.PORT);
     if (isNaN(PORT)) {

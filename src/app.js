@@ -4,6 +4,8 @@ import { ApiRoute } from './routes/api.js';
 import { BtcsRoute } from './routes/btcs.js';
 import cors from 'cors';
 import Config from './utils/config.js';
+import morgan from 'morgan';
+import { errorHandler } from './middleware/error.js'
 
 const appConfig = new Config();
 
@@ -17,8 +19,18 @@ class App {
     this.app = express();
     this.app.use(bodyParser.json());
     this.app.use(cors(this.corsOptionClient));
+
+    this.#addMiddlewares();
+
     this.#addRoutes();
-    //TODO gestion des erreurs
+
+    this.app.use(errorHandler);
+  }
+
+  #addMiddlewares() {
+    if (appConfig.getEnv() === 'DEV') {
+      this.app.use(morgan('dev'));
+    }
   }
 
   #addRoutes() {
