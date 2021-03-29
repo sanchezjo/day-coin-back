@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+    back-api:
+        container_name: day-coin-back
+        build: .
+        ports:
+        -   ${PORT}:${PORT}
+        volumes:
+        -   ./:/usr/app/

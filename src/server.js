@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+
 import * as http from 'http';
 import Config from './utils/config.js';
 import app from './app.js';
